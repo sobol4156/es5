@@ -7,7 +7,7 @@ var Router = (function () {
     },
     navigate: function (path) {
       if (routes[path]) {
-        console.log(routes)
+        console.log(routes);
         routes[path]();
       } else {
         console.error("Route not found:", path);
@@ -49,5 +49,16 @@ window.onload = function () {
       Router.navigate(page);
     }
   });
-  Router.navigate("home");
+
+  window.addEventListener("hashchange", function () {
+    var page = window.location.hash.substring(2);
+    Router.navigate(page);
+  });
+
+  if (window.location.hash) {
+    var page = window.location.hash.substring(2);
+    Router.navigate(page);
+  } else {
+    Router.navigate("home");
+  }
 };
